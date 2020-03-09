@@ -24,7 +24,7 @@ class ExampleBasicListActivity : AppCompatActivity() {
   //pagination variable
   private var currentPage = 1
   private var maxPage = 100
-  private var isFetchData = true
+  private var isReadyLoadMore = true
 
   companion object {
     private val screenName = "RecyclerView.Adapter example"
@@ -54,9 +54,8 @@ class ExampleBasicListActivity : AppCompatActivity() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
           super.onScrolled(recyclerView, dx, dy)
           val isNeedToLoad = movieAdapter.itemCount - (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() < 12
-          if (dy > 0 && isNeedToLoad && isFetchData && currentPage < maxPage) {
-            isFetchData = false
-            toggleProgressBar(true)
+          if (dy > 0 && isNeedToLoad && isReadyLoadMore && currentPage < maxPage) {
+            isFetchData(true)
             currentPage++
             viewModel.fetchPopular(currentPage)
             Log.d("scroll", "scrolled bottom. page $currentPage")
@@ -69,8 +68,7 @@ class ExampleBasicListActivity : AppCompatActivity() {
   private fun initObserver() {
     viewModel.getMovieData().observe(this, Observer {
       movieAdapter.addData(it)
-      isFetchData = true
-      toggleProgressBar(false)
+      isFetchData(false)
     })
   }
 
@@ -78,7 +76,8 @@ class ExampleBasicListActivity : AppCompatActivity() {
     viewModel.fetchPopular()
   }
 
-  private fun toggleProgressBar(isShow: Boolean) {
-    binding.pbLoad.visibility = if (isShow) View.VISIBLE else View.GONE
+  private fun isFetchData(isFetch: Boolean) {
+    isReadyLoadMore = !isFetch
+    binding.pbLoad.visibility = if (isFetch) View.VISIBLE else View.GONE
   }
 }
