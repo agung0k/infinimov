@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.pagingexample.databinding.ActivityMainBinding
 import com.example.pagingexample.view.ExampleBasicListActivity
 import com.example.pagingexample.view.ExampleGroupieActivity
+import com.example.pagingexample.view.ExamplePagingActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -15,13 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        mBinding.tvBasic.setOnClickListener {
-            startActivity(Intent(this, ExampleBasicListActivity::class.java))
-        }
-
-        mBinding.tvGroupie.setOnClickListener {
-            startActivity(Intent(this, ExampleGroupieActivity::class.java))
+        mBinding.run {
+            tvBasic.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ExampleBasicListActivity::class.java))
+            }
+            tvGroupie.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ExampleGroupieActivity::class.java))
+            }
+            tvPaging.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ExamplePagingActivity::class.java))
+            }
         }
     }
 }

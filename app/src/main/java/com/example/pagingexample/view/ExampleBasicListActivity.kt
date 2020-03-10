@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pagingexample.R
 import com.example.pagingexample.adapter.MovieAdapter
 import com.example.pagingexample.databinding.ActivityExampleBasicListBinding
-import com.example.pagingexample.util.MoveItemDecorator
+import com.example.pagingexample.util.MovieItemDecorator
 import com.example.pagingexample.viewModel.MovieViewModel
 
 class ExampleBasicListActivity : AppCompatActivity() {
@@ -45,9 +45,9 @@ class ExampleBasicListActivity : AppCompatActivity() {
   private fun initList() {
     binding.rvMovie.apply {
       layoutManager = LinearLayoutManager(this@ExampleBasicListActivity)
-      addItemDecoration(MoveItemDecorator(resources.getDimensionPixelSize(R.dimen.margin_16)))
+      addItemDecoration(MovieItemDecorator(resources.getDimensionPixelSize(R.dimen.margin_16)))
 
-      movieAdapter = MovieAdapter(this@ExampleBasicListActivity)
+      movieAdapter = MovieAdapter()
       adapter = movieAdapter
 
       addOnScrollListener(object : RecyclerView.OnScrollListener() {

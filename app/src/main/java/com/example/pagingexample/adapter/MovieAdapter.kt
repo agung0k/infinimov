@@ -12,12 +12,12 @@ import com.example.pagingexample.databinding.ItemMovieBinding
 import com.example.pagingexample.model.Movie
 import com.example.pagingexample.util.Constants
 
-class MovieAdapter(val context: Context) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter() : RecyclerView.Adapter<MovieViewHolder>() {
 
   private var movies: List<Movie> = ArrayList()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-    val view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
     return MovieViewHolder(view)
   }
 
@@ -38,8 +38,4 @@ class MovieAdapter(val context: Context) : RecyclerView.Adapter<MovieViewHolder>
     this.movies += movies
     notifyItemRangeInserted(indexStart, movies.size)
   }
-}
-
-class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-  val binding = DataBindingUtil.bind<ItemMovieBinding>(view)
 }

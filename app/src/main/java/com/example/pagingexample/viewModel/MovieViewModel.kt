@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.example.pagingexample.model.Movie
 import com.example.pagingexample.model.ResponseApi
 import com.example.pagingexample.util.Apifactory
+import com.example.pagingexample.util.MovieDataSource
 import com.example.pagingexample.util.TmdbApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -35,4 +36,6 @@ class MovieViewModel : ViewModel() {
   }
 
   fun getMovieData() = movieData as LiveData<List<Movie>>
+
+  fun getDataSource() = MovieDataSource(viewModelScope)
 }
